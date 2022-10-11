@@ -17,5 +17,10 @@ namespace JiuJitsuTracker.Controllers
             IEnumerable<ClassInfo> objectCategoryList = _db.Classes;
             return View(objectCategoryList);
         }
+        // Get action method
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }
