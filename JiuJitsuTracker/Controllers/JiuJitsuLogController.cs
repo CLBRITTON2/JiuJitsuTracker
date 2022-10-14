@@ -22,5 +22,16 @@ namespace JiuJitsuTracker.Controllers
         {
             return View();
         }
+
+        // Post action method
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(ClassInfo obj)
+        {
+            // Adds user input class info to the database then saves info to the db
+            _db.Classes.Add(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
