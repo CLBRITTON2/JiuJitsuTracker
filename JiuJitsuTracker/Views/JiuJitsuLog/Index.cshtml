@@ -19,21 +19,22 @@
     <table class="table table-bordered table-striped" style="width:100%">
         <thead>
             <tr>
-                <th width="10%">
+                <th width="16%">
                     Date
                 </th>
-                <th width="15%">
+                <th width="10%">
                     Belt Color
                 </th>
-                <th width="20%">
+                <th width="17%">
                     Class Uniform (Gi or No Gi)
                 </th>
-                <th width="45%">
+                <th width="40%">
                     Class Focus
                 </th>
-                <th width="10%">
+                <th width="7%">
                     Mat Time
                 </th>
+                <th width="10%"></th>
             </tr>
         </thead>
         <tbody>
@@ -54,6 +55,12 @@
                     </td>
                     <td>
                         @obj.MatTime
+                    </td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a asp-controller="JiuJitsuLog" asp-action="Edit" asp-route-id="@obj.Id"
+                            class="btn btn-primary mx-3"> <i class="bi bi-pencil-square"></i>Edit</a>
+                        </div>
                     </td>
                 </tr>
             }

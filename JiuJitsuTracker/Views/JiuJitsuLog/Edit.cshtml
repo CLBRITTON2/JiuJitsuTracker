@@ -1,0 +1,36 @@
+﻿@model ClassInfo
+
+<form method="post" asp-action="Edit">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Edit Log Entry</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control"/>
+        </div>
+        <div class="mb-3">
+            <label asp-for="BeltColor"></label>
+            <input asp-for="BeltColor" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="ClassUniform"></label>
+            <input asp-for="ClassUniform" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="ClassFocus"></label>
+            <input asp-for="ClassFocus" class="form-control" />
+            <span asp-validation-for="ClassFocus" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="MatTime"></label>
+            <input asp-for="MatTime" class="form-control" />
+            <span asp-validation-for="MatTime" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+        <a asp-controller="JiuJitsuLog" asp-action="Index" class="btn btn-secondary" style="width:150px">
+            Back to Log
+        </a>
+    </div>
+</form>
