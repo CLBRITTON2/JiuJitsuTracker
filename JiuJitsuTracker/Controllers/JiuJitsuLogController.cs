@@ -72,5 +72,41 @@ namespace JiuJitsuTracker.Controllers
             }
             return View(obj);
         }
+        // Get action method
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                // if ID is null or is = 0 it's invalid
+                return NotFound();
+            }
+
+            var classFromDb = _db.Classes.Find(id);
+
+            if (classFromDb == null)
+            {
+                return NotFound();
+            }
+
+            return View(classFromDb);
+        }
+
+        // Post action method
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletePost(int? id)
+        {
+            var obj = _db.Classes.Find(id);
+
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            // Delete DB entry
+            _db.Classes.Remove(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
