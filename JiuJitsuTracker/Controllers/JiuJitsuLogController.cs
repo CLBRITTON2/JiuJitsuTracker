@@ -28,10 +28,15 @@ namespace JiuJitsuTracker.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(ClassInfo obj)
         {
-            // Adds user input class info to the database then saves info to the db
-            _db.Classes.Add(obj);
-            _db.SaveChanges();
-            return RedirectToAction("Index");
+            // Server side validation
+            if (ModelState.IsValid)
+            {
+                // Adds user input class info to the database then saves info to the db
+                _db.Classes.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(obj);
         }
     }
 }

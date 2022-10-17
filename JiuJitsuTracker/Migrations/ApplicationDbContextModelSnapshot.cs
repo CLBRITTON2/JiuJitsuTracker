@@ -41,19 +41,19 @@ namespace JiuJitsuTracker.Migrations
                     b.Property<DateTime>("ClassLogDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ClassUniformType")
+                    b.Property<string>("ClassUniform")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MatTime")
-                        .HasColumnType("int");
+                    b.Property<double>("MatTime")
+                        .HasColumnType("float");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TotalMatTime")
-                        .HasColumnType("int");
+                    b.Property<double>("TotalMatTime")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 

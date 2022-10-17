@@ -15,12 +15,13 @@
             <input asp-for="BeltColor" class="form-control" />
         </div>
         <div class="mb-3">
-            <label asp-for="ClassUniformType"></label>
-            <input asp-for="ClassUniformType" class="form-control" />
+            <label asp-for="ClassUniform"></label>
+            <input asp-for="ClassUniform" class="form-control" />
         </div>
         <div class="mb-3">
             <label asp-for="ClassFocus"></label>
             <input asp-for="ClassFocus" class="form-control" />
+            <span asp-validation-for="ClassFocus" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label asp-for="MatTime"></label>

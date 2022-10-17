@@ -17,10 +17,10 @@ namespace JiuJitsuTracker.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BeltColor = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ClassUniformType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ClassUniform = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ClassFocus = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MatTime = table.Column<int>(type: "int", nullable: false),
-                    TotalMatTime = table.Column<int>(type: "int", nullable: false),
+                    MatTime = table.Column<double>(type: "float", nullable: false),
+                    TotalMatTime = table.Column<double>(type: "float", nullable: false),
                     ClassLogDateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>

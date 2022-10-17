@@ -8,10 +8,11 @@ namespace JiuJitsuTracker.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string BeltColor { get; set; }
-        public string ClassUniformType { get; set; }
+        public string ClassUniform { get; set; }
+        [Required]
         public string ClassFocus { get; set; }
-        public int MatTime { get; set; }
-        public int TotalMatTime { get; set; }
+        public double MatTime { get; set; }
+        public double TotalMatTime { get; set; }
         public DateTime ClassLogDateTime { get; set; } = DateTime.Now;
     }
 }

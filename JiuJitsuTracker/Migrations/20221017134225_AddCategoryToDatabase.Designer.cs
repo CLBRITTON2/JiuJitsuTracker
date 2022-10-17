@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JiuJitsuTracker.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221011193049_AddCategoryToDatabase")]
+    [Migration("20221017134225_AddCategoryToDatabase")]
     partial class AddCategoryToDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,19 +43,19 @@ namespace JiuJitsuTracker.Migrations
                     b.Property<DateTime>("ClassLogDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ClassUniformType")
+                    b.Property<string>("ClassUniform")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MatTime")
-                        .HasColumnType("int");
+                    b.Property<double>("MatTime")
+                        .HasColumnType("float");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TotalMatTime")
-                        .HasColumnType("int");
+                    b.Property<double>("TotalMatTime")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
