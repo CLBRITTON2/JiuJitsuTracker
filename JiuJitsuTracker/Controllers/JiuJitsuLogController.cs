@@ -1,4 +1,4 @@
-﻿using JiuJitsuTracker.Data;
+﻿using JiuJitsuTracker.DataAccess;
 using JiuJitsuTracker.Models;
 using Microsoft.AspNetCore.Mvc;
 

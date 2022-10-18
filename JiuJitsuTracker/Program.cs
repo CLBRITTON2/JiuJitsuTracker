@@ -1,4 +1,4 @@
-using JiuJitsuTracker.Data;
+using JiuJitsuTracker.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

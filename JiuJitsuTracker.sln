@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiuJitsuTracker", "JiuJitsuTracker\JiuJitsuTracker.csproj", "{F2764929-DA8D-4ADD-B67B-6CEB7908C507}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JiuJitsuTracker", "JiuJitsuTracker\JiuJitsuTracker.csproj", "{F2764929-DA8D-4ADD-B67B-6CEB7908C507}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiuJitsuTracker.DataAccess", "JiuJitsuTracker.DataAccess\JiuJitsuTracker.DataAccess.csproj", "{D461E3F2-8C4C-40F1-9C9E-3C2178B33AD3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiuJitsuTracker.Models", "JiuJitsuTracker.Models\JiuJitsuTracker.Models.csproj", "{F597CE1C-F9CF-4568-8EE2-DB47C64457ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JiuJitsuTracker.Utilities", "JiuJitsuTracker.Utilities\JiuJitsuTracker.Utilities.csproj", "{9BA696BA-ACD6-4E39-8793-EE590EFB85C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{F2764929-DA8D-4ADD-B67B-6CEB7908C507}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2764929-DA8D-4ADD-B67B-6CEB7908C507}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2764929-DA8D-4ADD-B67B-6CEB7908C507}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D461E3F2-8C4C-40F1-9C9E-3C2178B33AD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D461E3F2-8C4C-40F1-9C9E-3C2178B33AD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D461E3F2-8C4C-40F1-9C9E-3C2178B33AD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D461E3F2-8C4C-40F1-9C9E-3C2178B33AD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F597CE1C-F9CF-4568-8EE2-DB47C64457ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F597CE1C-F9CF-4568-8EE2-DB47C64457ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F597CE1C-F9CF-4568-8EE2-DB47C64457ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F597CE1C-F9CF-4568-8EE2-DB47C64457ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BA696BA-ACD6-4E39-8793-EE590EFB85C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BA696BA-ACD6-4E39-8793-EE590EFB85C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BA696BA-ACD6-4E39-8793-EE590EFB85C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BA696BA-ACD6-4E39-8793-EE590EFB85C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
