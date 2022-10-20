@@ -47,14 +47,14 @@ namespace JiuJitsuTracker.Controllers
                 return NotFound();
             }
 
-            var classFromDb = _db.Classes.Find(id);
+            var classFromDbFirst = _db.Classes.FirstOrDefault(x => x.Name == "id");
 
-            if (classFromDb == null)
+            if (classFromDbFirst == null)
             {
                 return NotFound();
             }
 
-            return View(classFromDb);
+            return View(classFromDbFirst);
         }
 
         // Post action method
