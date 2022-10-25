@@ -1,4 +1,5 @@
 ﻿using JiuJitsuTracker.DataAccess;
+using JiuJitsuTracker.DataAccess.Repository.IRepository;
 using JiuJitsuTracker.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,15 +7,15 @@ namespace JiuJitsuTracker.Controllers
 {
     public class JiuJitsuLogController : Controller
     {
-        private readonly ApplicationDbContext _db;
-        public JiuJitsuLogController(ApplicationDbContext db)
+        private readonly IClassInfoRepository _db;
+        public JiuJitsuLogController(IClassInfoRepository db)
         {
             _db = db;
         }
         public IActionResult Index()
         {
             // Go to database, retrieve classes, convert them to a list
-            IEnumerable<ClassInfo> objectClassList = _db.Classes;
+            IEnumerable<ClassInfo> objectClassList = _db.GetAll();
             return View(objectClassList);
         }
         // Get action method
@@ -32,8 +33,8 @@ namespace JiuJitsuTracker.Controllers
             if (ModelState.IsValid)
             {
                 // Adds user input class info to the database then saves info to the db
-                _db.Classes.Add(obj);
-                _db.SaveChanges();
+                _db.Add(obj);
+                _db.Save();
                 return RedirectToAction("Index");
             }
             return View(obj);
@@ -47,7 +48,7 @@ namespace JiuJitsuTracker.Controllers
                 return NotFound();
             }
 
-            var classFromDbFirst = _db.Classes.FirstOrDefault(x => x.Name == "id");
+            var classFromDbFirst = _db.GetFirstOrDefault(x => x.Id == id);
 
             if (classFromDbFirst == null)
             {
@@ -66,8 +67,8 @@ namespace JiuJitsuTracker.Controllers
             if (ModelState.IsValid)
             {
                 // Updates properties in DB when user uses the update button
-                _db.Classes.Update(obj);
-                _db.SaveChanges();
+                _db.Update(obj);
+                _db.Save();
                 return RedirectToAction("Index");
             }
             return View(obj);
@@ -81,14 +82,14 @@ namespace JiuJitsuTracker.Controllers
                 return NotFound();
             }
 
-            var classFromDb = _db.Classes.Find(id);
+            var classFromDbFirst = _db.GetFirstOrDefault(x => x.Id == id);
 
-            if (classFromDb == null)
+            if (classFromDbFirst == null)
             {
                 return NotFound();
             }
 
-            return View(classFromDb);
+            return View(classFromDbFirst);
         }
 
         // Post action method
@@ -96,7 +97,7 @@ namespace JiuJitsuTracker.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeletePost(int? id)
         {
-            var obj = _db.Classes.Find(id);
+            var obj = _db.GetFirstOrDefault(x => x.Id == id);
 
             if (obj == null)
             {
@@ -104,8 +105,8 @@ namespace JiuJitsuTracker.Controllers
             }
 
             // Delete DB entry
-            _db.Classes.Remove(obj);
-            _db.SaveChanges();
+            _db.Remove(obj);
+            _db.Save();
             return RedirectToAction("Index");
         }
     }
