@@ -7,15 +7,15 @@ namespace JiuJitsuTracker.Controllers
 {
     public class JiuJitsuLogController : Controller
     {
-        private readonly IClassInfoRepository _db;
-        public JiuJitsuLogController(IClassInfoRepository db)
+        private readonly IUnitOfWork _unitOfWork;
+        public JiuJitsuLogController(IUnitOfWork unitOfWork)
         {
-            _db = db;
+            _unitOfWork = unitOfWork;
         }
         public IActionResult Index()
         {
             // Go to database, retrieve classes, convert them to a list
-            IEnumerable<ClassInfo> objectClassList = _db.GetAll();
+            IEnumerable<ClassInfo> objectClassList = _unitOfWork.ClassInfo.GetAll();
             return View(objectClassList);
         }
         // Get action method
@@ -33,8 +33,8 @@ namespace JiuJitsuTracker.Controllers
             if (ModelState.IsValid)
             {
                 // Adds user input class info to the database then saves info to the db
-                _db.Add(obj);
-                _db.Save();
+                _unitOfWork.ClassInfo.Add(obj);
+                _unitOfWork.Save();
                 return RedirectToAction("Index");
             }
             return View(obj);
@@ -48,7 +48,7 @@ namespace JiuJitsuTracker.Controllers
                 return NotFound();
             }
 
-            var classFromDbFirst = _db.GetFirstOrDefault(x => x.Id == id);
+            var classFromDbFirst = _unitOfWork.ClassInfo.GetFirstOrDefault(x => x.Id == id);
 
             if (classFromDbFirst == null)
             {
@@ -67,8 +67,8 @@ namespace JiuJitsuTracker.Controllers
             if (ModelState.IsValid)
             {
                 // Updates properties in DB when user uses the update button
-                _db.Update(obj);
-                _db.Save();
+                _unitOfWork.ClassInfo.Update(obj);
+                _unitOfWork.Save();
                 return RedirectToAction("Index");
             }
             return View(obj);
@@ -82,7 +82,7 @@ namespace JiuJitsuTracker.Controllers
                 return NotFound();
             }
 
-            var classFromDbFirst = _db.GetFirstOrDefault(x => x.Id == id);
+            var classFromDbFirst = _unitOfWork.ClassInfo.GetFirstOrDefault(x => x.Id == id);
 
             if (classFromDbFirst == null)
             {
@@ -97,7 +97,7 @@ namespace JiuJitsuTracker.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeletePost(int? id)
         {
-            var obj = _db.GetFirstOrDefault(x => x.Id == id);
+            var obj = _unitOfWork.ClassInfo.GetFirstOrDefault(x => x.Id == id);
 
             if (obj == null)
             {
@@ -105,8 +105,8 @@ namespace JiuJitsuTracker.Controllers
             }
 
             // Delete DB entry
-            _db.Remove(obj);
-            _db.Save();
+            _unitOfWork.ClassInfo.Remove(obj);
+            _unitOfWork.Save();
             return RedirectToAction("Index");
         }
     }
