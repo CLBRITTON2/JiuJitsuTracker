@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace JiuJitsuTracker.Controllers
 {
+    [Area("Admin")]
     public class JiuJitsuLogController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
