@@ -1,7 +1,10 @@
 ﻿using JiuJitsuTracker.DataAccess;
 using JiuJitsuTracker.DataAccess.Repository.IRepository;
 using JiuJitsuTracker.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace JiuJitsuTracker.Controllers
 {
@@ -13,10 +16,15 @@ namespace JiuJitsuTracker.Controllers
         {
             _unitOfWork = unitOfWork;
         }
-        public IActionResult Index()
+        [Authorize]
+        public IActionResult Index(ClassInfo obj)
         {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            obj.ApplicationUserId = claim.Value;
+
             // Go to database, retrieve classes, convert them to a list
-            IEnumerable<ClassInfo> objectClassList = _unitOfWork.ClassInfo.GetAll();
+            IEnumerable<ClassInfo> objectClassList = _unitOfWork.ClassInfo.GetAll().Where(x => x.ApplicationUserId == claim.Value);
             return View(objectClassList);
         }
         // Get action method
@@ -30,15 +38,14 @@ namespace JiuJitsuTracker.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(ClassInfo obj)
         {
-            // Server side validation
-            if (ModelState.IsValid)
-            {
-                // Adds user input class info to the database then saves info to the db
-                _unitOfWork.ClassInfo.Add(obj);
-                _unitOfWork.Save();
-                return RedirectToAction("Index");
-            }
-            return View(obj);
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            obj.ApplicationUserId = claim.Value;
+
+            // Adds user input class info to the database then saves info to the db
+            _unitOfWork.ClassInfo.Add(obj);
+            _unitOfWork.Save();
+            return RedirectToAction("Index");
         }
         // Get action method
         public IActionResult Edit(int? id)
@@ -64,15 +71,15 @@ namespace JiuJitsuTracker.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(ClassInfo obj)
         {
-            // Server side validation
-            if (ModelState.IsValid)
-            {
-                // Updates properties in DB when user uses the update button
-                _unitOfWork.ClassInfo.Update(obj);
-                _unitOfWork.Save();
-                return RedirectToAction("Index");
-            }
-            return View(obj);
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            obj.ApplicationUserId = claim.Value;
+
+            // Updates properties in DB when user uses the update button
+            _unitOfWork.ClassInfo.Update(obj);
+            _unitOfWork.Save();
+            return RedirectToAction("Index");
+
         }
         // Get action method
         public IActionResult Delete(int? id)

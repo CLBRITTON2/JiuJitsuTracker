@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace JiuJitsuTracker.Models
 {
@@ -7,6 +8,8 @@ namespace JiuJitsuTracker.Models
     {
         [Key]
         public int Id { get; set; }
+        public string ApplicationUserId { get; set; }
+        [ForeignKey("ApplicationUserId")]
         [DisplayName("Name (Optional)")]
         public string Name { get; set; }
         [DisplayName("Belt Color")]
