@@ -45,6 +45,7 @@ namespace JiuJitsuTracker.Controllers
             // Adds user input class info to the database then saves info to the db
             _unitOfWork.ClassInfo.Add(obj);
             _unitOfWork.Save();
+            TempData["success"] = "Log entry created successfully";
             return RedirectToAction("Index");
         }
         // Get action method
@@ -78,6 +79,7 @@ namespace JiuJitsuTracker.Controllers
             // Updates properties in DB when user uses the update button
             _unitOfWork.ClassInfo.Update(obj);
             _unitOfWork.Save();
+            TempData["success"] = "Log entry updated successfully";
             return RedirectToAction("Index");
 
         }
@@ -115,6 +117,7 @@ namespace JiuJitsuTracker.Controllers
             // Delete DB entry
             _unitOfWork.ClassInfo.Remove(obj);
             _unitOfWork.Save();
+            TempData["success"] = "Log entry deleted successfully";
             return RedirectToAction("Index");
         }
     }
