@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
+var Configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json", optional: false)
+    .Build();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -18,6 +21,12 @@ builder.Services.AddDefaultIdentity<IdentityUser>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddAuthentication().AddFacebook(options =>
+{
+    options.AppId = Configuration["Facebook:AppId"];
+    options.AppSecret = Configuration["Facebook:AppSecret"];
+});
 
 var app = builder.Build();
 
