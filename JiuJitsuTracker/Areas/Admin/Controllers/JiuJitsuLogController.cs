@@ -19,12 +19,10 @@ namespace JiuJitsuTracker.Controllers
         [Authorize]
         public IActionResult Index(ClassInfo obj)
         {
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-            obj.ApplicationUserId = claim.Value;
+            var claim = GetUserId(obj);
 
             // Go to database, retrieve classes, convert them to a list
-            IEnumerable<ClassInfo> objectClassList = _unitOfWork.ClassInfo.GetAll().Where(x => x.ApplicationUserId == claim.Value);
+            IEnumerable<ClassInfo> objectClassList = _unitOfWork.ClassInfo.GetAll().Where(x => x.ApplicationUserId == claim);
             return View(objectClassList);
         }
         // Get action method
@@ -38,9 +36,7 @@ namespace JiuJitsuTracker.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(ClassInfo obj)
         {
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-            obj.ApplicationUserId = claim.Value;
+            GetUserId(obj);
 
             // Adds user input class info to the database then saves info to the db
             _unitOfWork.ClassInfo.Add(obj);
@@ -72,9 +68,7 @@ namespace JiuJitsuTracker.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(ClassInfo obj)
         {
-            var claimsIdentity = (ClaimsIdentity)User.Identity;
-            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-            obj.ApplicationUserId = claim.Value;
+            GetUserId(obj);
 
             // Updates properties in DB when user uses the update button
             _unitOfWork.ClassInfo.Update(obj);
@@ -119,6 +113,13 @@ namespace JiuJitsuTracker.Controllers
             _unitOfWork.Save();
             TempData["success"] = "Log entry deleted successfully";
             return RedirectToAction("Index");
+        }
+        private string GetUserId(ClassInfo obj)
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            obj.ApplicationUserId = claim.Value;
+            return claim.Value;
         }
     }
 }
